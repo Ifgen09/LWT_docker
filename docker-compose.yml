@@ -13,7 +13,7 @@ services:
     volumes:
       - "./lwt_html:/var/www/html"
     ports:
-      - "0.0.0.0:80:80"
+      - "9090:80"
     restart: always
      
   db:
