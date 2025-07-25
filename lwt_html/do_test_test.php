@@ -234,6 +234,68 @@ if ($count <= 0) {
 		echo $r;  // Show Sentence
 	}
 	
+	// Add text input for user guess in L2→L1 and L1→L2 modes
+	if ($testtype == 1 || $testtype == 2) {
+		echo '<div style="text-align:center; margin: 20px 0;">';
+		echo '<label for="userGuess">Your Answer:</label> ';
+		echo '<input type="text" id="userGuess" autocomplete="off" style="font-size:1.2em; padding:2px 6px;"> ';
+		echo '<button type="button" onclick="checkAnswer()">Check</button>';
+		echo '<div id="feedback" style="margin-top:10px;font-weight:bold;"></div>';
+		echo '<div id="correctAnswer" style="display:none;margin-top:10px;">Correct answer: <span id="theAnswer"></span></div>';
+		echo '<div id="hint" style="margin-top:8px; color: #555;"></div>';
+		echo '</div>';
+		echo "<script type='text/javascript'>\n"
+		. "var answerRevealed = false;\n"
+		. "var failedAttempts = 0;\n"
+		. "function getHint(answer) {\n"
+		. "    var clean = answer.replace(/^[\\[]|[\\]]$/g, '').trim();\n"
+		. "    if (clean.length === 0) return '';\n"
+		. "    if (failedAttempts === 1) {\n"
+		. "        return 'Hint: The answer starts with ' + clean.charAt(0) + ' and has ' + clean.length + ' letters.';\n"
+		. "    } else if (failedAttempts === 2) {\n"
+		. "        return 'Hint: ' + clean.charAt(0) + ' ' + Array(clean.length).join('_ ').trim();\n"
+		. "    } else if (failedAttempts === 3) {\n"
+		. "        var idx = Math.floor(Math.random() * clean.length);\n"
+		. "        var masked = clean.split('').map(function(c, i) { return (i === 0 || i === idx ? c : '_'); }).join(' ');\n"
+		. "        return 'Hint: ' + masked;\n"
+		. "    } else if (failedAttempts >= 4) {\n"
+		. "        var arr = clean.split('');\n"
+		. "        for (let i = arr.length - 1; i > 0; i--) {\n"
+		. "            const j = Math.floor(Math.random() * (i + 1));\n"
+		. "            [arr[i], arr[j]] = [arr[j], arr[i]];\n"
+		. "        }\n"
+		. "        var shuffled = arr.join('');\n"
+		. "        return 'Hint: Anagram - ' + shuffled;\n"
+		. "    }\n"
+		. "    return '';\n"
+		. "}\n"
+		. "function checkAnswer() {\n"
+		. "    var userInput = document.getElementById('userGuess').value.trim().toLowerCase();\n"
+		. "    var correct = " . json_encode($testtype == 1 ? ($nosent ? $trans : ("[" . $trans . "]")) : $save) . ".toLowerCase();\n"
+		. "    if (userInput === correct) {\n"
+		. "        document.getElementById('feedback').textContent = 'Correct!';\n"
+		. "        document.getElementById('feedback').style.color = 'green';\n"
+		. "        document.getElementById('theAnswer').textContent = correct;\n"
+		. "        document.getElementById('correctAnswer').style.display = 'block';\n"
+		. "        answerRevealed = true;\n"
+		. "        failedAttempts = 0;\n"
+		. "        document.getElementById('hint').textContent = '';\n"
+		. "    } else {\n"
+		. "        failedAttempts++;\n"
+		. "        document.getElementById('feedback').textContent = 'Try again.';\n"
+		. "        document.getElementById('feedback').style.color = 'red';\n"
+		. "        if (!answerRevealed) {\n"
+		. "            document.getElementById('correctAnswer').style.display = 'none';\n"
+		. "        }\n"
+		. "        document.getElementById('hint').textContent = getHint(correct);\n"
+		. "    }\n"
+		. "}\n"
+		. "document.getElementById('userGuess').addEventListener('keydown', function(e) {\n"
+		. "    if (e.key === 'Enter') checkAnswer();\n"
+		. "});\n"
+		. "document.getElementById('userGuess').focus();\n"
+		. "</script>";
+	}
 ?>
 
 <script type="text/javascript">
