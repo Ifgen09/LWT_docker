@@ -48,6 +48,51 @@ This document describes the main features of the LWT application, how they work,
 
 ---
 
+## 4a. Detailed Test Modes in LWT
+
+LWT offers several test modes to reinforce vocabulary learning. Each mode targets a different aspect of language acquisition:
+
+### 1. L2 → L1 (Recognition)
+- **Purpose:** Test your ability to recognize a word or expression in the target language (L2) and recall its meaning in your native language (L1).
+- **How it works:**
+  - The system presents the term (or the term within a sentence) in L2.
+  - You try to recall the meaning in L1, then reveal the answer to check yourself.
+  - You mark your answer as correct or incorrect, which updates the term's learning status and review schedule.
+  - Available both in sentence context and as an isolated term.
+
+### 2. L1 → L2 (Recall)
+- **Purpose:** Test your ability to produce or recall the term in the target language (L2) when given its meaning in your native language (L1).
+- **How it works:**
+  - The system presents the translation (L1), optionally within a sentence.
+  - You try to recall or produce the L2 term, then reveal the answer.
+  - You mark your answer as correct or incorrect.
+  - Available both in sentence context and as an isolated term.
+
+### 3. Cloze (Massive-Context Cloze Deletion, MCD)
+- **Purpose:** Reinforce contextual understanding by recalling a term that has been blanked out in a sentence.
+- **How it works:**
+  - The system shows a sentence with the target term replaced by a blank (e.g., "I ___ to the store").
+  - You try to recall the missing term.
+  - Hovering or clicking can reveal the translation as a hint.
+  - You mark your answer as correct or incorrect.
+
+### 4. Table/Word List Format
+- **Purpose:** Allow self-paced review and testing of multiple terms at once.
+- **How it works:**
+  - All selected terms are presented in a table with columns for term, translation, sentence, romanization, status, and edit options.
+  - You can hide/reveal columns and test yourself by clicking to reveal answers.
+
+### 5. Test Flow and Feedback
+- **Eligibility:** Only terms with a translation and appropriate status are tested. Terms marked as "Ignored" or "Well Known" are excluded. Terms are scheduled for review based on a spaced repetition score.
+- **Progress Tracking:** During a test, a status display shows elapsed time, a progress bar, and counts of total, not yet tested, wrong, and correct answers.
+- **Keyboard Shortcuts:** Efficient marking and navigation are supported via keyboard shortcuts.
+
+### 6. Customization
+- **Test Selection:** You can start tests for all terms in a language, all terms in a text, or a custom selection.
+- **Answer Marking:** After each answer, you can mark the term as correct or incorrect, edit the term, or change its status directly during the test.
+
+---
+
 ## 5. Database and Backup
 - **Backup and restore your database.**
 - **Support for multiple "table sets"** (multi-user or multi-language environments within one database).
