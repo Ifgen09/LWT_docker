@@ -24,7 +24,6 @@ services:
      environment:
        MYSQL_DATABASE: "lwt"
        MYSQL_ROOT_PASSWORD: "root"
-       MYSQL_ROOT_PASSWORD: "root"
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
 volumes:
