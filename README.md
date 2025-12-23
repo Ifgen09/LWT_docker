@@ -12,3 +12,13 @@ This docker setup will allow you to skip the installation of a full webserver an
   <BR>docker-compose build lwt
   <BR>docker-compose up lwt
 7) Access your LWT website on: http://localhost/
+
+## Quick start on new hardware
+
+1. Install Docker and Docker Compose v2+.
+2. From the project root run:
+   - `docker compose build`
+   - `docker compose up -d`
+3. Open the app at http://localhost:9090 (port mapped in `docker-compose.yml`).
+4. MySQL runs in the `db` service (image `mysql:5.7`) with database `lwt` and root password `root`; data persists in the `db_data` volume.
+5. Stop with `docker compose down` (add `-v` if you want to drop the database volume).
