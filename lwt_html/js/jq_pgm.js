@@ -273,6 +273,12 @@ function word_click_event_do_test_test() {
 }
 
 function keydown_event_do_test_test(e) {
+	// Don't intercept keyboard shortcuts if user is typing in an input field
+	var target = e.target || e.srcElement;
+	if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+		return true;  // Allow normal typing
+	}
+	
 	if (e.which == 32 && OPENED == 0) {  // space : show sol.
 		$('.word').click();
 		cClick();
