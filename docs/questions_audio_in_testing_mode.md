@@ -23,6 +23,26 @@ This document lists clarifying questions to finalize scope, design, and acceptan
 - **Access control**: Who can upload/modify audio (roles, ownership rules)?
 - **Cleanup**: On term delete or file replacement, should old/orphaned files be deleted?
 
+### Audio segmentation from full MP3 files
+- **Workflow**: Should users be able to upload a full MP3 and extract word segments, or only upload pre-segmented files?
+- **Storage strategy**: 
+  - Store full file + timestamps (allows re-extraction, multiple words from same source)?
+  - Or extract segments immediately and delete source (saves space)?
+- **UI approach**: 
+  - Simple timeline with start/end markers?
+  - Waveform visualization (requires additional processing)?
+  - Click-to-set vs. drag handles for selection?
+- **Processing**: Server-side FFmpeg vs. client-side Web Audio API?
+- **Source file management**: 
+  - Keep source files indefinitely for re-extraction?
+  - Auto-delete after X days or when all segments extracted?
+  - Allow manual deletion of source files?
+- **Multiple words from same source**: 
+  - Can one source file be used for multiple words?
+  - How to track which words share a source?
+- **Extraction limits**: Max segment duration? Min duration? Max source file size?
+- **Schema changes**: If storing timestamps, add `WoAudioSourceURI`, `WoAudioStart`, `WoAudioEnd` columns?
+
 ### Testing mode data flow
 - **Fetch strategy**: Include `WoAudioURI` in existing queries or lazy-load via a dedicated endpoint?
 - **Fallbacks**: If missing audio, show disabled control, hide it, or generate TTS?

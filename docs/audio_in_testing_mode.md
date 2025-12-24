@@ -14,6 +14,7 @@ This document describes how to add the ability to play audio for a word during t
 ## 2. Audio Input in the UI
 - **Update the term creation/edit forms** (e.g., `edit_words.php`, `edit_tword.php`, `new_word.php`, `edit_mword.php`) to allow users to upload or specify an audio file/URL for each word.
 - **Save the audio file/URL** to the new database column.
+- **Optional: Audio segmentation**: Allow users to upload a full MP3 file (e.g., sentence/paragraph) and extract word-level segments using a timeline-based UI. See Phase 3b in the implementation plan for details.
 
 ## 3. Expose Audio in Testing Mode
 - **In the testing mode code** (`do_test_test.php` and `do_test_table.php`):
