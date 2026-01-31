@@ -238,7 +238,7 @@ if ($count <= 0) {
 	if ($testtype == 1 || $testtype == 2) {
 		echo '<div style="text-align:center; margin: 20px 0;">';
 		echo '<label for="userGuess">Your Answer:</label> ';
-		echo '<input type="text" id="userGuess" autocomplete="off" style="font-size:1.2em; padding:2px 6px;"> ';
+		echo '<input type="text" id="userGuess" autocomplete="off" autofocus style="font-size:1.2em; padding:2px 6px;"> ';
 		echo '<button type="button" onclick="checkAnswer()">Check</button>';
 		echo '<div id="feedback" style="margin-top:10px;font-weight:bold;"></div>';
 		echo '<div id="correctAnswer" style="display:none;margin-top:10px;">Correct answer: <span id="theAnswer"></span></div>';
@@ -293,7 +293,13 @@ if ($count <= 0) {
 		. "document.getElementById('userGuess').addEventListener('keydown', function(e) {\n"
 		. "    if (e.key === 'Enter') checkAnswer();\n"
 		. "});\n"
-		. "document.getElementById('userGuess').focus();\n"
+		. "// Focus input after DOM ready with delay to handle frameset timing\n"
+		. "$(document).ready(function() {\n"
+		. "    setTimeout(function() {\n"
+		. "        var input = document.getElementById('userGuess');\n"
+		. "        if (input) input.focus();\n"
+		. "    }, 50);\n"
+		. "});\n"
 		. "</script>";
 	}
 ?>
